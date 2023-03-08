@@ -33,17 +33,15 @@ export const UsuarioContextProvider = ({ children }) => {
     }
   }
 
-  const loginUsuario = async ({email, password}) => {
+  const loginUsuario = async (usuario) => {
     try {
-      const response = await deleteUsuarioRequest(id);
-      if (response.status == 200) {
-    
-        return true;
-      } else {
-        return false;
-      }
+      const response = await getUsuarioLoginRequest(usuario);
+
+      return(response);
+
     } catch (error) {
-      console.error(error);
+      console.log(error);
+
     }
   };
 

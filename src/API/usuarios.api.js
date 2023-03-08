@@ -11,15 +11,17 @@ export const getUsuariosRequest = async () => {
   }
 };
 
-
-export const getUsuarioLoginRequest = async () => {
+/* Recibe usuario */
+export const getUsuarioLoginRequest = async (usuario) => {
   try {
-    const response = await axios.get("http://localhost:4000/login");
+    const response = await axios.post("http://localhost:4000/login", usuario);
     return response;
   } catch (error) {
     console.error(error);
   }
 };
+
+
 export const createUsuarioRequest = async (usuario) => {
     try {
       const response = await axios.post(API_BASE_URL, usuario);

@@ -5,19 +5,28 @@ import { useUsuarios } from '../components/usuarioComponents/UsuariosContext/Usu
 function LoginPage(props) {
 
   const {loginUsuario} = useUsuarios();
-  const [usuarioLogin, setUsuarioLogin] = useState({email: "",password: ""})
-
-  const handleUsuarioLoginChange = (event) =>{
-    setUsuarioLogin(event.target.value);
-  }
+  const [usuarioLogin, setUsuarioLogin] = useState({email: "", password: ""})
 
 const handleSubmit = async(event) => {
   event.preventDefault();
-  let status;
+
+  console.log(usuarioLogin);
   try {
-    status = await loginUsuario(usuarioLogin)
+
+    const response = await loginUsuario(usuarioLogin)
+    const tipoUsuario = response.usuario.tipoUsuario;
+
+    if (response.status == 200) {
+      console.log("Acceso permitido");
+      if (tipoUsuario == true){
+        console.log("Bienvenido Admin");
+      }
+      console.log("Bienvenido Cliente");
+    }else{
+      alert("Acceso denegado");
+    }
   } catch (error) {
-    
+    console.log(error)
   }
 }
 
@@ -35,11 +44,12 @@ const handleSubmit = async(event) => {
           <h2>Iniciar sesión</h2>
           <div className="form-group">
             <label htmlFor="email">Correo electrónico:
+            
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(handleUsuarioLoginChange) => setUsuarioLogin(handleUsuarioLoginChange.target.value)}
+              value={usuarioLogin.email}
+              onChange={(event) => setUsuarioLogin({...usuarioLogin, email: event.target.value})}
               required
             />
             </label>
@@ -49,11 +59,12 @@ const handleSubmit = async(event) => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(handleUsuarioLoginChange) => setUsuarioLogin(handleUsuarioLoginChange.target.value)}
+              value={usuarioLogin.password}
+              onChange={(event) => setUsuarioLogin({...usuarioLogin, password: event.target.value})}
               required
             />
           </div>
+          
 
           <button type="submit" className="btn-login">
             Iniciar sesión
