@@ -13,10 +13,9 @@ export const getImagenesRequest = async () => {
 export const createImagenRequest = async (imagen) => {
   try {
     const formData = new FormData();
-    console.log(imagen);
-    console.log("esto es lo que se recibe en image api");
-    formData.append("nombre", imagen.nombre);
-    formData.append("descripcion", imagen.descripcion);
+
+    //formData.append("nombre", imagen.nombre);
+    //formData.append("descripcion", imagen.descripcion);
     formData.append("imagen", imagen.archivo);
 
     const response = await axios.post(API_BASE_URL, formData, {
@@ -35,8 +34,8 @@ export const createImagenRequest = async (imagen) => {
 export const updateImagenRequest = async (id, imagen) => {
   try {
     const formData = new FormData();
-    formData.append("nombre", imagen.nombre);
-    formData.append("descripcion", imagen.descripcion);
+    //formData.append("nombre", imagen.nombre);
+    //formData.append("descripcion", imagen.descripcion);
     formData.append("archivo", imagen.archivo);
     const response = await axios.put(`${API_BASE_URL}/${id}`, formData, {
       headers: {

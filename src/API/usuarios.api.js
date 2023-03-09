@@ -10,7 +10,6 @@ export const getUsuariosRequest = async () => {
     console.error(error);
   }
 };
-
 /* Recibe usuario */
 export const getUsuarioLoginRequest = async (usuario) => {
   try {
@@ -18,9 +17,9 @@ export const getUsuarioLoginRequest = async (usuario) => {
     return response;
   } catch (error) {
     console.error(error);
+    return error;
   }
 };
-
 
 export const createUsuarioRequest = async (usuario) => {
     try {

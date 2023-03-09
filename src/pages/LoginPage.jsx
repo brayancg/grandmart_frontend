@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import './LoginPage.css';
-import { Link } from 'react-router-dom';
-import { useUsuarios } from '../components/usuarioComponents/UsuariosContext/UsuarioProvider';
+import React, { useState } from "react";
+import "./LoginPage.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useUsuarios } from "../components/usuarioComponents/UsuariosContext/UsuarioProvider";
 
-function LoginPage(props) {
-  const {loginUsuario} = useUsuarios();
-  const [usuarioLogin, setUsuarioLogin] = useState({email: "", password: ""})
+export function LoginPage() {
+  const navigate = useNavigate();
+  const { loginUsuario } = useUsuarios();
+  const [usuarioLogin, setUsuarioLogin] = useState({ email: "", password: "" });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -13,30 +14,22 @@ function LoginPage(props) {
     console.log(usuarioLogin);
     try {
       const response = await loginUsuario(usuarioLogin);
-      //const tipoUsuario = response.usuario.tipoUsuario;
-
-      //if (response.status == 200 && tipoUsuario == 1) {
-        if (response.status == 200) {
-        console.log("Acceso permitido!!!");
-        alert("Acceso permitido!!!");
-        // Redirigir al usuario a una ventana diferente dependiendo de su tipo de usuario
-        alert("Eres admin");
-
-          //if (response.status == 200 && tipoUsuario == 0) {
-            if (response.status == 200) {
-            console.log("Acceso permitido!!!");
-            alert("Acceso permitido!!!");
-            alert("Eres cliente");
-        }
-
-      } else {
+      if (!response) {
         alert("Acceso denegado");
         console.log("Acceso denegado");
+      } else {
+        if (response.usuario.tipoUsuario == true) {
+          
+          navigate("/usuarios");
+        } else {
+         
+          navigate("/dashboardadmin");
+        }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div>
@@ -50,16 +43,23 @@ function LoginPage(props) {
       <div className="login-form-container">
         <form onSubmit={handleSubmit} className="login-form">
           <h2>Iniciar sesión</h2>
-          <br></br><br></br>
+          <br></br>
+          <br></br>
           <div className="form-group">
-            <label htmlFor="email">Correo electrónico:
-            <input
-              type="email"
-              id="email"
-              value={usuarioLogin.email}
-              onChange={(event) => setUsuarioLogin({...usuarioLogin, email: event.target.value})}
-              required
-            />
+            <label htmlFor="email">
+              Correo electrónico:
+              <input
+                type="email"
+                id="email"
+                value={usuarioLogin.email}
+                onChange={(event) =>
+                  setUsuarioLogin({
+                    ...usuarioLogin,
+                    email: event.target.value,
+                  })
+                }
+                required
+              />
             </label>
           </div>
           <div className="form-group">
@@ -68,7 +68,12 @@ function LoginPage(props) {
               type="password"
               id="password"
               value={usuarioLogin.password}
-              onChange={(event) => setUsuarioLogin({...usuarioLogin, password: event.target.value})}
+              onChange={(event) =>
+                setUsuarioLogin({
+                  ...usuarioLogin,
+                  password: event.target.value,
+                })
+              }
               required
             />
           </div>
@@ -96,11 +101,8 @@ function LoginPage(props) {
               <span>Atrás</span>
             </button>
           </Link>
-
         </form>
       </div>
     </div>
   );
 }
-
-export default LoginPage;

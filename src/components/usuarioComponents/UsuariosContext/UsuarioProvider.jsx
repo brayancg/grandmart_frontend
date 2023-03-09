@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import {
   getUsuariosRequest,
@@ -33,18 +33,6 @@ export const UsuarioContextProvider = ({ children }) => {
     }
   }
 
-  const loginUsuario = async (usuario) => {
-    try {
-      const response = await getUsuarioLoginRequest(usuario);
-
-      return(response);
-
-    } catch (error) {
-      console.log(error);
-
-    }
-  };
-
   const deleteUsuario = async (id) => {
     try {
       const response = await deleteUsuarioRequest(id);
@@ -59,7 +47,7 @@ export const UsuarioContextProvider = ({ children }) => {
       const response = await createUsuarioRequest(usuario);
 
       if (response.status == 201) {
-        setUsuarios([...usuarios, usuario]);
+        await refreshUsuarios(); // Llama a la función refreshUsuarios después de actualizar el usuario.
         return true;
       } else {
         return false;
@@ -71,22 +59,21 @@ export const UsuarioContextProvider = ({ children }) => {
 
   const updateUsuario = async (id, usuario) => {
     try {
- 
       const response = await updateUsuarioRequest(id, usuario);
-      console.log(response)
+      console.log(response);
       if (response.status == 200) {
         await refreshUsuarios(); // Llama a la función refreshUsuarios después de actualizar el usuario.
         return true;
       } else {
         return false;
       }
-      
     } catch (error) {
       console.error(error);
     }
   };
 
-  const refreshUsuarios = async () => { // Agrega la función refreshUsuarios.
+  const refreshUsuarios = async () => {
+    // Agrega la función refreshUsuarios.
     try {
       const response = await getUsuariosRequest();
       if (response === undefined) {
@@ -96,9 +83,23 @@ export const UsuarioContextProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
+  };
 
+  const loginUsuario = async (usuario) => {
+    try {
+      const response = await getUsuarioLoginRequest(usuario);
 
-  }
+      if (response.status == 200) {
+        return response.data;
+      } else {
+        
+        return null;
+      }
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <UsuarioContext.Provider

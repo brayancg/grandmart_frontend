@@ -1,5 +1,5 @@
 import { FormUsuario } from "../components/usuarioComponents/FormUsuario";
-import { Navbar } from "../components/HomePage/NavBar";
+import { Navbar } from "../components/NavBar";
 import { ListUsuarios } from "../components/usuarioComponents/ListUsuarios";
 import Modal from "../components/Modal/Modal";
 

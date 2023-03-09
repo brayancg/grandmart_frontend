@@ -1,13 +1,15 @@
-import "./App.css";
 import { MyRoutes } from "./routes/routes";
 import { UsuarioContextProvider } from "./components/usuarioComponents/UsuariosContext/UsuarioProvider";
+import { ProductoContextProvider } from "./components/ProductoComponents/ProductosContext/ProductoProvider";
 
 function App() {
   return (
     <UsuarioContextProvider>
-      <div className="App">
+      <ProductoContextProvider>
+      <div>
         <MyRoutes />
       </div>
+      </ProductoContextProvider>
     </UsuarioContextProvider>
   );
 }
