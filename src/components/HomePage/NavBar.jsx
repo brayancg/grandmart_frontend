@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import 'boxicons';
-import "../components/NavBar.css";
+import "./NavBar.css";
 
 export function Navbar() {
   return (
@@ -9,7 +9,7 @@ export function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
           <Link to="/">
-            <img alt="e-commerce" src="../src/Components/logo.png" />
+            <img alt="e-commerce" src="../src/components/HomePage/logo.png" />
           </Link>
         <div className="navbar-search">
           <div id="search">
