@@ -1,50 +1,48 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import 'boxicons';
+import "boxicons";
 import "./NavBar.css";
 
 export function Navbar() {
   return (
-    
     <nav className="navbar">
       <div className="navbar-container">
-          <Link to="/">
-            <img alt="e-commerce" src="../src/components/HomePage/logo.png" />
-          </Link>
+        <a href="/">
+          <img alt="e-commerce" src="../src/components/HomePage/logo.png" />
+        </a>
+
         <div className="navbar-search">
-          <div id="search">
-            <form>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Buscar"
-                name="search"
-              />
-                <button type="submit">
-                  <box-icon name='search-alt' color='#ffffff' ></box-icon>
-                </button>
-            </form>
-          </div>
+            <input type="text" placeholder="Buscar" name="search" />
+            <button type="submit">
+              <box-icon name="search-alt" color="#ffffff"></box-icon>
+            </button>
         </div>
 
         <div className="navbar-links">
           <ul>
-            <li>
-              <Link to="/">Home</Link>
+            <li className="dropdown">
+              <a href="#" className="dropbtn">
+                Categorías
+              </a>
+              <div className="dropdown-content">
+                  <a href="#">Salud</a>
+                  <a href="#">Hogar</a>
+                  <a href="#">Entretenimiento</a>
+              </div>
             </li>
             <li>
-              <Link to="/usuarios">Usuarios</Link>
+              <a href="/">Ofertas</a>
             </li>
             <li>
-              <Link to="/imagenes">Imagenes</Link>
+              <a href="/">Vender</a>
             </li>
             <li>
-              <Link to="/login">
-                <div className='iconuser'>
-                <box-icon name='user' color='#1c6bc3' ></box-icon>
+              <a href="/login">
+                <div className="iconuser">
+                  <box-icon name="user" color="#1c6bc3"></box-icon>
                 </div>
                 Sesión
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

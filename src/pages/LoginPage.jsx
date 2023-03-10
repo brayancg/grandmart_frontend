@@ -31,11 +31,11 @@ export function LoginPage() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/">
-            <img alt="e-commerce" src="../src/Components/HomePage/logo.png" />
-          </Link>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <a href="/">
+          <img alt="e-commerce" src="../src/components/HomePage/logo.png" />
+        </a>
         </div>
       </nav>
       <div className="login-form-container">
