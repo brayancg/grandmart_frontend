@@ -19,11 +19,9 @@ export function LoginPage() {
         console.log("Acceso denegado");
       } else {
         if (response.usuario.tipoUsuario == true) {
-          
           navigate("/usuarios");
         } else {
-         
-          navigate("/dashboardadmin");
+          navigate("/dashAdmin");
         }
       }
     } catch (error) {
@@ -106,3 +104,5 @@ export function LoginPage() {
     </div>
   );
 }
+
+export default LoginPage;

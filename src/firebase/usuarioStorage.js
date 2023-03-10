@@ -1,5 +1,5 @@
 import app from "./config";
-import { getDownloadURL, getStorage, ref, uploadBytes} from "firebase/usuarioStorage";
+import { getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
 const storage = getStorage(app);

@@ -1,4 +1,4 @@
-import { ImgForm } from "../components/imgComponents/imgForm";
+import { ImgForm } from "../components/ImgComponents/ImgForm";
 
 export function ImagenesPage() {
 
@@ -9,3 +9,5 @@ export function ImagenesPage() {
     </>
   );
 }
+
+export default ImagenesPage;
